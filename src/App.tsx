@@ -1,24 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
+import { useState } from 'react';
+import Gameplay from './Components/GamePlay/Gameplay';
 import './App.css';
 
 function App() {
+  const [spaces, setSpaces] = useState(Array(9).fill(''));
+  const [gameStep, setGameStep] = useState(0);
+  const [x, setX] = useState(true);
+
+  const handleTurn = (selectedIndex: number): void => {
+    if (spaces[selectedIndex]) {
+      return;
+    }
+
+    const player = x ? 'X' : 'O';
+    setSpaces(spaces.map((space, i) => i === selectedIndex ? player : space));
+    setGameStep(gameStep + 1);
+    setX(!x);
+  };
+
+  console.log(gameStep);
+  console.log(x);
+  console.log(spaces);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Gameplay 
+        spaces={spaces}
+        handleTurnFn={handleTurn} 
+      />
     </div>
   );
 }

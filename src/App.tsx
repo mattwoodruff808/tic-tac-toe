@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import calculateWinner from './utils/gameUtils';
 import Gameplay from './Components/GamePlay/Gameplay';
+import EndGame from './Components/EndGame/EndGame';
 import './App.css';
 
 function App() {
@@ -8,6 +9,7 @@ function App() {
   const [gameStep, setGameStep] = useState(0);
   const [x, setX] = useState(true);
   const winner = calculateWinner(spaces);
+  const [winHistory, setWinHistory] = useState(['']);
 
   const handleTurn = (selectedIndex: number): void => {
     if (spaces[selectedIndex] || winner) {
@@ -18,15 +20,33 @@ function App() {
     setSpaces(spaces.map((space, i) => i === selectedIndex ? player : space));
     setGameStep(gameStep + 1);
     setX(!x);
+    if (winner) {
+      setWinHistory([...winHistory, winner]);
+    }
+  };
+
+  const handleReset = () => {
+    setSpaces(Array(9).fill(''));
+    setGameStep(0);
+    setX(true);
   };
 
   return (
     <div className="App">
+      <h1>Tic-Tac-Toe</h1>
       <Gameplay 
         spaces={spaces}
-        handleTurnFn={handleTurn} 
+        handleTurnFn={handleTurn}
       />
-      {winner && `${winner} has won!!`}
+      {winner && <EndGame 
+                    result={winner}
+                    handleResetFn={handleReset} 
+                  />}
+      {gameStep === 9 && 
+      !winner && <EndGame 
+                    result={'tie'}
+                    handleResetFn={handleReset} 
+                  />}
     </div>
   );
 }

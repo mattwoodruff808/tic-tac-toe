@@ -2,6 +2,11 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  background-color: #e9edc9;
+}
+
+.App > h1 {
+  margin: 40px 0;
 }

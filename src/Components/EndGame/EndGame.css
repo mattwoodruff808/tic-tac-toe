@@ -1,11 +1,11 @@
 button {
-  width: 100px;
-  height: 50px;
-  background-color: #d4a373;
-  border: none;
-  cursor: pointer;
+    width: 100px;
+    height: 50px;
+    background-color: #d4a373;
+    border: none;
+    cursor: pointer;
 }
 
 button:hover {
-  background-color: #ebb47e;
+    background-color: #ebb47e;
 }

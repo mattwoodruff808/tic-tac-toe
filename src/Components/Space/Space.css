@@ -1,12 +1,12 @@
 .space {
-  height: 125px;
-  width: 125px;
-  background-color: #fefae0;
-  border: 1px rgba(0,0,0,0.8) solid;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  font-size: 75px;
-  cursor: pointer;
+    height: 125px;
+    width: 125px;
+    background-color: #fefae0;
+    border: 1px rgba(0, 0, 0, 0.8) solid;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 75px;
+    cursor: pointer;
 }

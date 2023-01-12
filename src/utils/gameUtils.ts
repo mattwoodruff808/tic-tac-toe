@@ -1,4 +1,4 @@
-export default function calculateWinner(spaces: string[]) {
+export function calculateWinner(spaces: string[]): string | null {
     const lines = [
         [0, 1, 2],
         [3, 4, 5],
@@ -16,4 +16,13 @@ export default function calculateWinner(spaces: string[]) {
         }
     }
     return null;
+}
+
+export function getHistory(): string[] {
+    const localHistory = localStorage.getItem('history');
+    return localHistory ? JSON.parse(localHistory) : [''];
+}
+
+export function saveHistory(history: string[]): void {
+    localStorage.setItem('history', JSON.stringify(history));
 }

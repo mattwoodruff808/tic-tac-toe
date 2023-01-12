@@ -32,6 +32,7 @@ function App() {
 			saveHistory(history);
 			setWinHistory(history);
 		}
+
 		setSpaces(Array(9).fill(''));
 		setGameStep(0);
 		setX(true);

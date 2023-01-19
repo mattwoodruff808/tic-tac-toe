@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { calculateWinner, getHistory, saveHistory } from './utils/gameUtils';
 import Score from './Components/Score/Score';
 import Gameplay from './Components/GamePlay/Gameplay';
@@ -12,9 +12,19 @@ function App() {
 	const winner = calculateWinner(spaces);
 	const localHistory = getHistory();
 	const [winHistory, setWinHistory] = useState(localHistory);
+	const historyChanged = useRef(false);
+
+	useEffect(() => {
+		if (winner && !historyChanged.current) {
+			const history = [...winHistory, winner];
+			saveHistory(history);
+			setWinHistory(history);
+			historyChanged.current = true;
+		}
+	}, [winner, winHistory]);
 
 	const handleTurn = (selectedIndex: number): void => {
-		if (spaces[selectedIndex] || winner) {
+		if (spaces[selectedIndex]) {
 			return;
 		}
 
@@ -27,15 +37,10 @@ function App() {
 	};
 
 	const handleReset = (): void => {
-		if (winner) {
-			const history = [...winHistory, winner];
-			saveHistory(history);
-			setWinHistory(history);
-		}
-
 		setSpaces(Array(9).fill(''));
 		setGameStep(0);
 		setX(true);
+		historyChanged.current = false;
 	};
 
 	return (
